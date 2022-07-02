@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  themes:
+    container_name: "MySqlDataCorrection"
+    build:
+      context: ${PWD}/src
+      dockerfile: ${PWD}/Dockerfile
+    ports:
+      - '8101:80'
+    working_dir: /var/www/html
+    volumes:
+      - ${PWD}/src/:/var/www/html
+    # restart: always
