@@ -24,15 +24,19 @@ session_start();
         // Numeric array
         $result -> fetch_all(MYSQLI_ASSOC);
         foreach($result as $i=>$row){
-            echo '
-            <tr>
-                <td>'.($i+1).'</td>';
+            $table = null;
             foreach($row as $val){
-                echo '<td class="queue" data-content="table" data-table="'.$val.'">'.$val.'</td>';
-                echo '<td><ul></ul></td>';
-
+                $table = $val;
             }
-            echo '</tr>';
+            $tables = array();
+            if(in_array($table,$tables)){
+                echo '
+                <tr>
+                    <td>'.($i+1).'</td>
+                    <td class="queue" data-content="table" data-table="'.$table.'">'.$table.'</td>
+                    <td><ul></ul></td>';
+                echo '</tr>';
+            }
         }
     }
 ?>

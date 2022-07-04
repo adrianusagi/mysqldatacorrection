@@ -7,9 +7,14 @@ $type = $_POST['type'];
 $isnullable = $_POST['isnullable'];
 
 if(substr($type,0,7) == 'varchar') $type = 'varchar'; 
+if(substr($type,0,4) == 'enum') $type = 'enum'; 
 
-if(in_array($type,array('varchar','date','datetime')) && $isnullable == 'YES'){
+$tables = array();
+
+if(in_array($type,array('varchar','date','datetime','enum')) && $isnullable == 'YES' && in_array($table,$tables)){
     if($type == 'varchar'){
+        $sql = "UPDATE $table SET `$field` = NULL WHERE `$field` = ''";
+    }if($type == 'enum'){
         $sql = "UPDATE $table SET `$field` = NULL WHERE `$field` = ''";
     }else if($type == 'date'){
         $sql = "UPDATE $table SET `$field` = NULL WHERE `$field` = '0000-00-00'";
